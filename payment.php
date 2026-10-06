@@ -544,20 +544,18 @@ $order_items = mysqli_query($conn, "
     <?php endif; ?>
 
 
+    <!-- PESAN BERHASIL
+         HANYA MUNCUL SEKALI -->
+
     <?php if ($success != ""): ?>
 
-        <div class="success">
+<?php if ($success != ""): ?>
 
-            <?= htmlspecialchars($success); ?>
+    <div class="success">
+        <?= htmlspecialchars($success); ?>
+    </div>
 
-            <a
-                href="order_success.php?id_order=<?= $id_order; ?>"
-                class="home-btn"
-            >
-                LIHAT PESANAN
-            </a>
-
-        </div>
+<?php endif; ?>
 
     <?php endif; ?>
 
@@ -678,6 +676,20 @@ $order_items = mysqli_query($conn, "
             Pembayaran
         </div>
 
+<?php if ($success != "" || $order['payment_status'] == 'Paid'): ?>
+
+    <div class="box">
+
+        <a
+            href="order_success.php?id_order=<?= $id_order; ?>"
+            class="home-btn"
+        >
+            LIHAT PESANAN
+        </a>
+
+    </div>
+
+<?php endif; ?>
 
         <div class="row">
 
@@ -801,27 +813,6 @@ $order_items = mysqli_query($conn, "
                 </button>
 
             </form>
-
-        </div>
-
-
-    <?php else: ?>
-
-
-        <div class="box">
-
-            <div class="success">
-
-                Pembayaran sudah dikonfirmasi! ✅
-
-            </div>
-
-            <a
-                href="order_success.php?id_order=<?= $id_order; ?>"
-                class="home-btn"
-            >
-                LIHAT PESANAN
-            </a>
 
         </div>
 
